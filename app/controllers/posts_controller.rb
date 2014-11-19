@@ -1,9 +1,4 @@
 class PostsController < ApplicationController
-  def index
-    @index = Post.all
-    render json: @index
-  end
-  
   def create
     @post = Post.new(post_params)
     if @post.save
@@ -13,7 +8,24 @@ class PostsController < ApplicationController
     end
   end
   
+  def destroy
+    @post = Post.find(params[:id])
+    @post.destroy!
+    render json: @post
+  end
+  
+  def index
+    @index = Post.all
+    render json: @index
+  end
+  
   def update
+    @post = Post.find(params[:id])
+    if @post.update(post_params)
+      render json: @post
+    else
+      render json: @post.errors.full_messages, status: 422
+    end
   end
   
   def show
@@ -21,11 +33,7 @@ class PostsController < ApplicationController
     render json: @post
   end
   
-  def destroy
-    @post = Post.find(params[:id])
-    @post.destroy!
-    render json: @post
-  end
+
   
   private
   
