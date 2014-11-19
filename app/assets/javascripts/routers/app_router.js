@@ -7,17 +7,18 @@ Posts.Routers.AppRouter = Backbone.Router.extend({
     "posts/:id": "show" 
   },
   show: function(id){
-    var post = new Posts.Models.Post({id: id});
-    post.fetch();
-      
+    var post = Posts.Collections.posts.getOrFetch(id);
+
     var showView = new Posts.Views.PostShow({
       model: post
     });
+    
     showView.render();
     this.$rootEl.html(showView.$el);
   },
   index: function(){
-    var posts = new Posts.Collections.Posts();
+    var posts = Posts.Collections.posts;
+    
     posts.fetch();
       
     var indexView = new Posts.Views.PostsIndex({
