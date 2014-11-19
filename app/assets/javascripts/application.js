@@ -11,8 +11,18 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs
-//= require_tree .
+//= require jquery_ujs  
 //= require jquery.serializejson.min
 //= require underscore
 //= require backbone
+  
+  
+
+// Namespaces
+//= require posts
+
+//= require_tree ./models/.
+//= require_tree ./collections/.
+  
+// Remember this must be last or we will die  
+//= require_tree .
