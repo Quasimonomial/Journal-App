@@ -11,18 +11,15 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery_ujs  
+//= require jquery_ujs
 //= require jquery.serializejson.min
 //= require underscore
 //= require backbone
-  
-  
-
-// Namespaces
 //= require posts
-
-//= require_tree ./models/.
-//= require_tree ./collections/.
-  
-// Remember this must be last or we will die  
-//= require_tree .
+//= require_tree ./models
+//= require_tree ./collections
+// We need templates to required before the views, because JST needs
+// to be defined when we define the view prototype's `template`
+// property.
+//= require_tree ../templates
+//= require_tree ./views
