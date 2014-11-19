@@ -1,18 +1,11 @@
 window.Posts = {
   Collections: {}, 
   Models: {},
-  Views: {}
+  Views: {},
+  Routers: {}
 };
 
 $(function(){
-  posts = new Posts.Collections.Posts()
-  posts.fetch({
-    success: function(collection){
-      indexView = new Posts.Views.PostsIndex({
-        collection: collection
-      });
-      
-      $("body").append( indexView.render().$el );
-    }
-  })
+  new Posts.Routers.AppRouter({rootEl: "#main"});
+  Backbone.history.start();// I am sure this is important
 });

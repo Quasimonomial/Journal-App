@@ -16,7 +16,7 @@ Posts.Views.PostsIndex = Backbone.View.extend({
   
   deletePost : function(event){
     var id = $(event.currentTarget).data("post-id");
-    var post  =this.collection.get(id);
+    var post  = this.collection.get(id);
     post.destroy();
   }
   
