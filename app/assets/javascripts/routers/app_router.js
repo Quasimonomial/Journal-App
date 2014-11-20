@@ -4,8 +4,10 @@ Posts.Routers.AppRouter = Backbone.Router.extend({
   },
   routes: {
     "" : "index",
+    "posts/new" : "new",
     "posts/:id": "show",
-    "posts/:id/edit": "edit" 
+    "posts/:id/edit": "edit",
+    
   },
   show: function(id){
     var post = Posts.Collections.posts.getOrFetch(id);
@@ -39,6 +41,17 @@ Posts.Routers.AppRouter = Backbone.Router.extend({
     });
     
     this.$rootEl.html(editView.$el);
+  },
+  new: function(){
+   
+    var post = new Posts.Models.Post();
+
+    var newView = new Posts.Views.PostForm({
+      model: post
+    });
+    
+    newView.render();
+    this.$rootEl.html(newView.$el);
   }
   
 });

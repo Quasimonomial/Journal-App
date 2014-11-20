@@ -5,6 +5,8 @@
   <label>Body
   <textarea name="post[body]"><%= post.escape("body") %></textarea>
   </label>
-  <input type="hidden" value="<%= post.id %>">
+  <% if (post.id) { %>
+    <input type="hidden" value="<%= post.id %>">
+  <% } %>
   <input type="submit" value="submit">
 </form>

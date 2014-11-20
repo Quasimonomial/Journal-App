@@ -19,15 +19,30 @@ Posts.Views.PostForm = Backbone.View.extend({
     event.preventDefault();
     var postData = $(event.currentTarget).serializeJSON();
     var that = this;
-    this.model.save(postData.post, {
-      success: function(){
-        Backbone.history.navigate("/posts/" + that.model.id, {trigger: true});
-      },
-      error: function(model, response){
-        that.render();
-        alert(JSON.parse(response.responseText).join(".\n"));
-        that.$el;
-      }
-    });
+    if(this.model.isNew()){
+      Posts.Collections.posts.create(postData.post, {
+        success: function(){
+          Backbone.history.navigate("/#", {trigger: true});
+        },
+        error: function(model, response){
+          that.render();
+          alert(JSON.parse(response.responseText).join(".\n"));
+        }
+      });
+      
+      
+      
+      
+    } else{
+      this.model.save(postData.post, {
+        success: function(){
+          Backbone.history.navigate("/posts/" + that.model.id, {trigger: true});
+        },
+        error: function(model, response){
+          that.render();
+          alert(JSON.parse(response.responseText).join(".\n"));
+        }
+      });
+    }
   }
 })
