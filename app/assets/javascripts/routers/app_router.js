@@ -1,25 +1,8 @@
 Posts.Routers.AppRouter = Backbone.Router.extend({
   initialize: function(options){
     this.$rootEl = $(options.rootEl);
-  },
-  routes: {
-    "" : "index",
-    "posts/new" : "new",
-    "posts/:id": "show",
-    "posts/:id/edit": "edit",
-    
-  },
-  show: function(id){
-    var post = Posts.Collections.posts.getOrFetch(id);
-
-    var showView = new Posts.Views.PostShow({
-      model: post
-    });
-    
-    showView.render();
-    this.$rootEl.html(showView.$el);
-  },
-  index: function(){
+    this.$sidebar = this.$rootEl.find('.sidebar');
+    this.$content = this.$rootEl.find('.content'); 
     var posts = Posts.Collections.posts;
     
     posts.fetch();
@@ -30,9 +13,31 @@ Posts.Routers.AppRouter = Backbone.Router.extend({
     
     indexView.render();
     
-    this.$rootEl.html(indexView.$el);
-
+    this.$sidebar.html(indexView.$el);
   },
+  
+  routes: {
+    "" : "root",
+    "posts/new" : "new",
+    "posts/:id": "show",
+    "posts/:id/edit": "edit",
+  },
+  
+  root: function(){
+    this.$content.empty();
+  },
+
+  show: function(id){
+    var post = Posts.Collections.posts.getOrFetch(id);
+
+    var showView = new Posts.Views.PostShow({
+      model: post
+    });
+    
+    showView.render();
+    this.$content.html(showView.$el);
+  },
+  
   edit: function(id){
     var post = Posts.Collections.posts.getOrFetch(id);
 
@@ -40,8 +45,9 @@ Posts.Routers.AppRouter = Backbone.Router.extend({
       model: post
     });
     
-    this.$rootEl.html(editView.$el);
+    this.$content.html(editView.$el);
   },
+  
   new: function(){
    
     var post = new Posts.Models.Post();
@@ -51,7 +57,7 @@ Posts.Routers.AppRouter = Backbone.Router.extend({
     });
     
     newView.render();
-    this.$rootEl.html(newView.$el);
+    this.$content.html(newView.$el);
   }
   
 });

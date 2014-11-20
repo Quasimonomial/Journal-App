@@ -21,8 +21,8 @@ Posts.Views.PostForm = Backbone.View.extend({
     var that = this;
     if(this.model.isNew()){
       Posts.Collections.posts.create(postData.post, {
-        success: function(){
-          Backbone.history.navigate("/#", {trigger: true});
+        success: function(model){
+          Backbone.history.navigate("/posts/" + model.id, {trigger: true});
         },
         error: function(model, response){
           that.render();

@@ -15,6 +15,7 @@
 //= require jquery.serializejson.min
 //= require underscore
 //= require backbone
+//  require backbone.TriggerHappy
 //= require posts
 //= require_tree ./models
 //= require_tree ./collections
