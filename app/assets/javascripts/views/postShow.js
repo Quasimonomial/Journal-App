@@ -36,6 +36,11 @@ Posts.Views.PostShow = Backbone.View.extend({
     $display.append($title.val()).addClass("post-title");
     
     $title.replaceWith($display);
+    
+    this.model.set('title', $title.val());
+    this.model.save();
+    
+    
   },
   
   openBody: function(event){
@@ -55,7 +60,11 @@ Posts.Views.PostShow = Backbone.View.extend({
       .addClass("post-body");
     
     $body.replaceWith($display);
-  }
+    
+    //this.model.set("body", $body.text())
+    //this.model.save();
+  },
   
+
   
 })
