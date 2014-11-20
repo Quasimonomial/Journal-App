@@ -22,6 +22,11 @@ Posts.Views.PostForm = Backbone.View.extend({
     this.model.save(postData.post, {
       success: function(){
         Backbone.history.navigate("/posts/" + that.model.id, {trigger: true});
+      },
+      error: function(model, response){
+        that.render();
+        alert(JSON.parse(response.responseText).join(".\n"));
+        that.$el;
       }
     });
   }
